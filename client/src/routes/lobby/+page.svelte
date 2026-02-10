@@ -80,8 +80,7 @@
 
 			meName = localStorage.getItem('fgu_player_name') || `Player_${Date.now()}`;
 			localStorage.setItem('fgu_player_name', meName);
-			localStorage.setItem("fgu_level_id", levelId);
-
+			localStorage.setItem('fgu_level_id', levelId);
 		} catch {
 			meId = crypto.randomUUID();
 			meName = `Player_${Date.now()}`;
@@ -191,11 +190,10 @@
 	}
 </script>
 
-
 <section class="lobby-wrapper">
 	<div class="lobby-container">
 		<div class="col-span-2 flex h-full flex-col gap-10">
-			<div class="flex items-center gap-4 text-2xl font-bold">
+			<div class="flex items-center gap-4 text-2xl font-bold justify-center">
 				<h1>Lobby</h1>
 				<span>-</span>
 				<h2>Level: {levelId.toUpperCase()}</h2>
@@ -237,7 +235,7 @@
 				{/each}
 			</div>
 		</div>
-		<div class="flex h-full flex-col gap-2">
+		<div class="flex h-full flex-col justify-between">
 			<div class="flex flex-col gap-4 border-b-2 border-l-2 p-4">
 				<button
 					class="btn-lobby bg-white/30 py-2"
@@ -278,7 +276,7 @@
 				</div>
 			</div>
 
-			<div class="wheel-wrapper mb-2 flex h-full w-full items-center justify-center">
+			<div class="wheel-wrapper mb-2 flex h-full w-full items-center justify-center max-h-[500px]">
 				{#if browser}
 					<Wheel
 						items={wheelItems}

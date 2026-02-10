@@ -72,7 +72,7 @@
 
 </script>
 
-<section class="flex h-full flex-col items-center gap-4 bg-bgBaseC p-4 py-20">
+<section class="flex h-full min-h-screen flex-col items-center gap-4 bg-bgBaseC p-4 py-20">
 	<h2 class="flex flex-col gap-2 text-center text-5xl font-black">
 		Willkommen bei den ersten offiziellen <span class="text-7xl text-bgAccentC">FGU-Spielen</span>
 	</h2>
