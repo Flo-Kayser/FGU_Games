@@ -86,10 +86,10 @@
 			<label
 				class="charCard"
 				class:active={name === char.name}
-				on:mouseenter={() => char._video?.play()}
+				on:mouseenter={() => char._video?.play?.().catch?.(() => {})}
 				on:mouseleave={() => {
 					char._video?.pause();
-					char._video.currentTime = 0;
+					char._video && (char._video.currentTime = 0);
 				}}
 			>
 				<div class="charBanner">

@@ -11,15 +11,15 @@ export function getWheelSize() {
 }
 
 export function getPlayerName() {
-	if (!browser) return null;
+	if (!browser) return '';
 
 	const name = localStorage.getItem('fgu_player_name');
 
-	return name ? String(name) : null;
+	return name ? String(name) : '';
 }
 
 export function getPlayerImgPath(imgType) {
-	if (!browser) return null;
+	if (!browser) return '';
 
 	const name = getPlayerName().toLowerCase().split(' ')[0];
 	const shortName = name ? name[0] + name[name.length - 1] : '';
