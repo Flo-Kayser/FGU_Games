@@ -15,13 +15,13 @@
 		80px 80px;
 
 	.lobby-container {
-		@apply container mx-auto h-full gap-6 p-8 select-none grid grid-cols-3  justify-between;
+		@apply container mx-auto h-full gap-6 p-8 select-none grid grid-cols-3;
 
 		.pitch {
-			@apply relative flex items-center justify-center;
+			@apply relative flex items-center justify-center h-fit;
 			.pitchImg {
 				filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.9));
-				@apply h-[80vh] object-contain;
+				@apply h-full object-contain;
 			}
 			.position {
 				@apply absolute h-24 -translate-x-1/2 -translate-y-1/2 cursor-pointer xl:h-28 2xl:h-32;
