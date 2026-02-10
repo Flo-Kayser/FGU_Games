@@ -18,7 +18,7 @@
 		@apply h-full gap-6 p-8 select-none grid grid-cols-3;
 
 		.pitch {
-			@apply relative flex items-center justify-center h-full;
+			@apply relative flex items-center justify-center h-full w-fit;
 			.pitchImg {
 				filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.9));
 				@apply h-full object-contain;

@@ -192,7 +192,7 @@
 
 <section class="lobby-wrapper">
 	<div class="lobby-container">
-		<div class="col-span-2 flex h-full flex-col gap-10">
+		<div class="col-span-2 flex h-full flex-col gap-10 items-center">
 			<div class="flex items-center gap-4 text-2xl font-bold justify-center">
 				<h1>Lobby</h1>
 				<span>-</span>
