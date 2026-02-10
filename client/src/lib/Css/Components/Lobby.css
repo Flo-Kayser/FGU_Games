@@ -1,0 +1,54 @@
+.lobby-wrapper {
+	@apply h-screen w-screen overflow-hidden;
+
+	background:
+		radial-gradient(circle, transparent 20%, #0a0a03 20%, #0a0a03 80%, transparent 80%, transparent)
+			0 0 / 160px 160px,
+		radial-gradient(circle, transparent 20%, #0a0a03 20%, #0a0a03 80%, transparent 80%, transparent)
+			80px 80px / 120px 160px,
+		linear-gradient(#222 1px, transparent 1px) 0 -0.5px / 40px 40px,
+		linear-gradient(90deg, #222 1px, #0a0a03 1px) -0.5px 0 / 40px 40px #0a0a03;
+	background-size:
+		160px 160px,
+		160px 160px,
+		80px 80px,
+		80px 80px;
+
+	.lobby-container {
+		@apply container mx-auto h-full gap-6 p-8 select-none grid grid-cols-3  justify-between;
+
+		.pitch {
+			@apply relative flex items-center justify-center;
+			.pitchImg {
+				filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.9));
+				@apply h-[80vh] object-contain;
+			}
+			.position {
+				@apply absolute h-24 -translate-x-1/2 -translate-y-1/2 cursor-pointer xl:h-28 2xl:h-32;
+
+                &.locked{
+                    @apply cursor-not-allowed;
+                }
+
+				img {
+					@apply h-full w-auto object-contain grayscale-100 transition-all duration-300;
+				}
+				span {
+					@apply absolute bottom-0 left-1/2 -translate-x-1/2 rounded-full bg-black/70 px-2 py-1 text-xs font-black text-white transition-all duration-200;
+				}
+				&.picked {
+					img {
+						@apply filter-none;
+					}
+					span {
+						@apply bg-black/80;
+					}
+				}
+			}
+		}
+	}
+}
+
+.btn-lobby {
+	@apply cursor-pointer transition-all duration-200 hover:scale-105 active:scale-95 disabled:cursor-not-allowed disabled:hover:scale-100;
+}

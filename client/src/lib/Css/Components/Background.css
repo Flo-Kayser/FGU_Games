@@ -1,0 +1,54 @@
+:root::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -100;
+    pointer-events: none;
+
+    background:
+            repeating-linear-gradient(
+                    0deg,
+                    transparent 0 calc(var(--tile) - var(--line-w)),
+                    var(--line) calc(var(--tile) - var(--line-w)) var(--tile)
+            ),
+            repeating-linear-gradient(
+                    60deg,
+                    transparent 0 calc(var(--tile) - var(--line-w)),
+                    var(--line) calc(var(--tile) - var(--line-w)) var(--tile)
+            ),
+            repeating-linear-gradient(
+                    -60deg,
+                    transparent 0 calc(var(--tile) - var(--line-w)),
+                    var(--line) calc(var(--tile) - var(--line-w)) var(--tile)
+            ),
+            linear-gradient(
+                    160deg,
+                    rgba(0, 0, 0, 0.15) 0%,
+                    rgba(0, 0, 0, 0.55) 45%,
+                    rgba(0, 0, 0, 0.15) 100%
+            ),
+            radial-gradient(
+                    80% 74% at 5% 90%,
+                    color-mix(in oklab, var(--color-bgAccentC) 75%, transparent) 0%,
+                    color-mix(in oklab, var(--color-bgAccentC) 42%, transparent) 40%,
+                    transparent 70%
+            ),
+            radial-gradient(
+                    60% 55% at 85% 85%,
+                    color-mix(in oklab, var(--color-bgAccentC) 35%, transparent) 0%,
+                    color-mix(in oklab, var(--color-bgAccentC) 12%, transparent) 40%,
+                    transparent 60%
+            ),
+            linear-gradient(#0b0a04, var(--color-bgBaseC));
+    background-blend-mode: normal, normal, normal, multiply, screen, screen, normal;
+    background-size: cover;
+    background-position: center;
+}
+
+:root {
+    --tile: 26px;
+    --line-w: 1px;
+    --line: hsla(55, 70%, 70%, 0.06);
+}
+
+

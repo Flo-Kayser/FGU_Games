@@ -1,0 +1,116 @@
+.overlay,
+.overlay-sides {
+	position: fixed;
+	inset: 0;
+	z-index: 9999;
+	pointer-events: none;
+}
+
+.overlay-vertical {
+	@apply flex flex-col items-center justify-center;
+	transform: translateY(-100%);
+	&.cover {
+		animation: vCover 0.45s ease forwards;
+	}
+	&.uncover {
+		animation: vUncover 0.45s ease forwards;
+	}
+
+	img {
+		@apply h-1/2 max-w-1/2;
+
+		filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.9));
+		mask-image: linear-gradient(to bottom, #000 0%, #000 80%, transparent 100%);
+	}
+
+	background:
+		radial-gradient(circle, transparent 20%, #0a0a03 20%, #0a0a03 80%, transparent 80%, transparent)
+			0 0 / 160px 160px,
+		radial-gradient(circle, transparent 20%, #0a0a03 20%, #0a0a03 80%, transparent 80%, transparent)
+			80px 80px / 120px 160px,
+		linear-gradient(#222 1px, transparent 1px) 0 -0.5px / 40px 40px,
+		linear-gradient(90deg, #222 1px, #0a0a03 1px) -0.5px 0 / 40px 40px #0a0a03;
+	background-size:
+		160px 160px,
+		160px 160px,
+		80px 80px,
+		80px 80px;
+}
+
+@keyframes vCover {
+	from {
+		transform: translateY(-100%);
+	}
+	to {
+		transform: translateY(0%);
+	}
+}
+@keyframes vUncover {
+	from {
+		transform: translateY(0%);
+	}
+	to {
+		transform: translateY(100%);
+	}
+}
+
+.overlay-sides {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+.overlay-sides .panel {
+	background: black;
+	will-change: transform;
+}
+.overlay-sides .left {
+	transform: translateX(-100%);
+}
+.overlay-sides .right {
+	transform: translateX(100%);
+}
+
+.overlay-sides.cover .left {
+	animation: sLeftIn 0.45s ease-in forwards;
+}
+.overlay-sides.cover .right {
+	animation: sRightIn 0.45s ease-in forwards;
+}
+.overlay-sides.uncover .left {
+	animation: sLeftOut 0.45s ease-out forwards;
+}
+.overlay-sides.uncover .right {
+	animation: sRightOut 0.45s ease-out forwards;
+}
+
+@keyframes sLeftIn {
+	from {
+		transform: translateX(-100%);
+	}
+	to {
+		transform: translateX(0%);
+	}
+}
+@keyframes sRightIn {
+	from {
+		transform: translateX(100%);
+	}
+	to {
+		transform: translateX(0%);
+	}
+}
+@keyframes sLeftOut {
+	from {
+		transform: translateX(0%);
+	}
+	to {
+		transform: translateX(-100%);
+	}
+}
+@keyframes sRightOut {
+	from {
+		transform: translateX(0%);
+	}
+	to {
+		transform: translateX(100%);
+	}
+}

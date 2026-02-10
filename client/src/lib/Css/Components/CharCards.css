@@ -1,0 +1,112 @@
+.charCard {
+	@apply relative flex h-[430px] w-full max-w-[320px] flex-col place-content-between;
+
+	.charBanner,
+	.charStats {
+		@apply relative h-[200px] w-[110%] rounded-[15px] bg-black ;
+
+		&::before,
+		&::after {
+			content: '';
+			@apply absolute z-10 h-[20px] w-[20px];
+		}
+	}
+	.charBanner {
+		&::before,
+		&::after {
+			@apply rounded-bl-[20px];
+			box-shadow: -6px 6px var(--color-bgBaseC);
+		}
+		&::before {
+			@apply top-[106px] left-[-1px];
+		}
+		&::after {
+			@apply bottom-[-1px] left-[105px];
+		}
+		.vidBox {
+			@apply absolute inset-0 overflow-hidden rounded-[15px];
+
+			video {
+				@apply h-full w-full object-cover opacity-0 transition-opacity duration-200 ease-in-out;
+			}
+		}
+	}
+	.charStats {
+		@apply relative h-[220px] w-full items-center bg-textC text-black;
+
+		.charInfo {
+			@apply mb-4 flex flex-col items-center pt-4;
+			.name {
+				@apply flex w-full scale-y-150 pl-32 text-2xl font-black;
+			}
+			div {
+				@apply w-full px-6 pt-16;
+				span {
+					@apply font-bold;
+				}
+				li {
+					@apply ml-5 list-disc text-sm;
+				}
+			}
+		}
+
+		.fakeBtn {
+			@apply relative left-1/2 z-20 w-fit -translate-x-1/2 cursor-pointer rounded-[30px] border-[7px] border-textC bg-bgAccentC px-3 py-1 text-lg tracking-[2px] text-white transition-all duration-200 ease-in-out outline-none;
+			&:hover {
+				letter-spacing: 5px;
+			}
+
+            &::before,
+            &::after {
+                content: "";
+                @apply absolute w-[20px] h-[20px] bg-transparent;
+            }
+            &::before {
+                @apply top-[21px] left-[-20px] rounded-tr-[20px];
+                box-shadow: 4px -6px var(--color-textC);
+            }
+            &::after {
+                @apply top-[21px] right-[-20px] rounded-tl-[20px];
+                box-shadow: -4px -6px var(--color-textC);
+            }
+		}
+
+		&::before,
+		&::after {
+			@apply rounded-tl-[20px];
+			box-shadow: -6px -6px var(--color-bgBaseC);
+		}
+		&::before {
+			@apply bottom-[106px] left-[-1px];
+		}
+		&::after {
+			@apply top-[-1px] left-[109px];
+		}
+	}
+
+	.charImg {
+		@apply absolute top-1/2 -left-[70px] z-20 h-[180px] w-[180px] -translate-y-1/2 rounded-full border-[10px] border-bgBaseC transition-all duration-200 ease-in-out ;
+
+		.imgBox {
+			@apply absolute inset-0 overflow-hidden rounded-full;
+
+			img {
+				@apply h-full w-full object-cover;
+			}
+		}
+	}
+
+	&:hover {
+		.vidBox video {
+			opacity: 1;
+		}
+	}
+	&.active {
+		.charImg, .charStats {
+			@apply border-red-500;
+		}
+        .fakeBtn {
+            @apply bg-red-500  tracking-[5px];
+        }
+	}
+}

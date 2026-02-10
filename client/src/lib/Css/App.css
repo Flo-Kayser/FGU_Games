@@ -1,0 +1,12 @@
+@import 'tailwindcss';
+
+@import './Base/Colors.css';
+@import './Base/Basics.css';
+
+@import "./Components/Background.css";
+@import "./Components/CharacterImg.css";
+@import "./Components/CharCards.css";
+@import "./Components/Lobby.css";
+@import "./Components/Wheel.css";
+
+@import "../Transtion/Transition.css";
