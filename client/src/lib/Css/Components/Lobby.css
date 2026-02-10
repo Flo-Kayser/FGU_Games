@@ -15,7 +15,7 @@
 		80px 80px;
 
 	.lobby-container {
-		@apply h-full gap-6 p-8 select-none grid grid-cols-3;
+		@apply h-full gap-6 p-8 select-none flex justify-center w-screen;
 
 		.pitch {
 			@apply relative flex items-center justify-center h-full w-fit;

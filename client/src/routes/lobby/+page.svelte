@@ -194,6 +194,7 @@
 		if (!pitchImgEl) return;
 		const h = pitchImgEl.getBoundingClientRect().height || 0;
 		posSize = Math.max(24, Math.round(h / 6));
+		console.log(posSize)
 	}
 
 	/* ---------------- Derived ---------------- */
@@ -258,7 +259,8 @@
 				{/each}
 			</div>
 		</div>
-		<div class="flex h-full flex-col justify-between text-2xl">
+		<div class="flex h-full flex-col text-2xl">
+			<div class="flex flex-col gap-10 max-h-1/2 justify-between h-full pb-4">
 			<div class="flex flex-col gap-4 border-b-2 border-l-2 p-4">
 				<button
 					class="btn-lobby bg-white/30 py-2"
@@ -285,9 +287,9 @@
 				</div>
 			</div>
 
-			<div class="mt-2 w-full text-center text-sm font-bold">
+			<div class="mt-2 w-full text-center text-lg font-bold">
 				<p>Wähle Zwei Postionen und mach dich bereit für das Auslosen des Minispiels!</p>
-				<div class="flex flex-col items-center gap-4 p-4 text-base">
+				<div class="flex flex-col items-center gap-4 p-4 text-2xl">
 					<span>PostionsPicks: {myPicks.length}/2</span>
 					<button
 						class="btn-lobby w-2/3 bg-white/30 py-2"
@@ -298,8 +300,9 @@
 					</button>
 				</div>
 			</div>
+			</div>
 
-			<div class="wheel-wrapper mb-2 flex h-full max-h-[500px] w-full items-center justify-center">
+			<div class="wheel-wrapper mb-2 flex  w-full items-center justify-center h-full max-h-1/2">
 				{#if browser}
 					<Wheel
 						items={wheelItems}
