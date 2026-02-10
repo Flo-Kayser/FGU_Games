@@ -24,7 +24,7 @@
 				@apply h-full object-contain;
 			}
 			.position {
-				@apply absolute h-24 -translate-x-1/2 -translate-y-1/2 cursor-pointer xl:h-28 2xl:h-32;
+				@apply absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer ;
 
                 &.locked{
                     @apply cursor-not-allowed;

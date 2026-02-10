@@ -37,6 +37,10 @@
 	let ro;
 	let wheelSize = 0;
 
+	let pitchImgEl;
+	let pitchRo;
+	let posSize = 0;
+
 	/* ---------------- Picks ---------------- */
 
 	function pick(posId) {
@@ -87,6 +91,14 @@
 		}
 
 		socket = getSocket();
+
+		/* ---------- CardSize Update ---------- */
+
+		updatePosSize();
+		pitchRo = new ResizeObserver(updatePosSize);
+		if (pitchImgEl) pitchRo.observe(pitchImgEl);
+
+		pitchImgEl?.addEventListener('load', updatePosSize);
 
 		/* ---------- Room Update ---------- */
 
@@ -164,6 +176,9 @@
 	});
 
 	onDestroy(() => {
+		pitchRo?.disconnect();
+		pitchImgEl?.removeEventListener('load', updatePosSize);
+
 		leaveRoom();
 
 		offUpdate?.();
@@ -172,6 +187,14 @@
 		offStart?.();
 		ro?.disconnect();
 	});
+
+	/* ---------------- CardSize ---------------- */
+
+	function updatePosSize() {
+		if (!pitchImgEl) return;
+		const h = pitchImgEl.getBoundingClientRect().height || 0;
+		posSize = Math.max(24, Math.round(h / 6));
+	}
 
 	/* ---------------- Derived ---------------- */
 
@@ -192,8 +215,8 @@
 
 <section class="lobby-wrapper">
 	<div class="lobby-container">
-		<div class="col-span-2 flex h-full flex-col gap-10 items-center">
-			<div class="flex items-center gap-4 text-2xl font-bold justify-center">
+		<div class="col-span-2 flex h-full flex-col items-center gap-10">
+			<div class="flex items-center justify-center gap-4 text-2xl font-bold">
 				<h1>Lobby</h1>
 				<span>-</span>
 				<h2>Level: {levelId.toUpperCase()}</h2>
@@ -215,7 +238,7 @@
 			</div>
 
 			<div class="pitch">
-				<img class="pitchImg" src="/lobby/pitch.png" alt="pitch" />
+				<img class="pitchImg" bind:this={pitchImgEl} src="/lobby/pitch.png" alt="pitch" />
 
 				{#each positions as pos}
 					{@const locked = preFilled.has(pos.id) || filled.has(pos.id)}
@@ -225,7 +248,7 @@
 						class="position"
 						class:locked
 						class:picked={myPicks.includes(pos.id)}
-						style={`left:${pos.x}%; top:${pos.y}%;`}
+						style={`left:${pos.x}%; top:${pos.y}%; height:${posSize}px`}
 						on:click={() => (selected ? unpick(pos.id) : pick(pos.id))}
 						disabled={(ready && myPicks.length !== 2) || locked}
 					>
@@ -235,7 +258,7 @@
 				{/each}
 			</div>
 		</div>
-		<div class="flex h-full flex-col justify-between">
+		<div class="flex h-full flex-col justify-between text-2xl">
 			<div class="flex flex-col gap-4 border-b-2 border-l-2 p-4">
 				<button
 					class="btn-lobby bg-white/30 py-2"
@@ -276,7 +299,7 @@
 				</div>
 			</div>
 
-			<div class="wheel-wrapper mb-2 flex h-full w-full items-center justify-center max-h-[500px]">
+			<div class="wheel-wrapper mb-2 flex h-full max-h-[500px] w-full items-center justify-center">
 				{#if browser}
 					<Wheel
 						items={wheelItems}
