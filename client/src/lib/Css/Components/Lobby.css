@@ -24,23 +24,23 @@
 				@apply h-full object-contain;
 			}
 			.position {
-				@apply absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer ;
+				@apply absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer;
 
+
+				img,div {
+					@apply h-full w-auto object-contain transition-all duration-300 grayscale-100;
+				}
+				.pos-label {
+					@apply absolute bottom-0 left-1/2 -translate-x-1/2 rounded-full bg-black/70 px-2 py-1 text-xs font-black text-white transition-all duration-200;
+				}
                 &.locked{
                     @apply cursor-not-allowed;
                 }
-
-				img {
-					@apply h-full w-auto object-contain grayscale-100 transition-all duration-300;
-				}
-				span {
-					@apply absolute bottom-0 left-1/2 -translate-x-1/2 rounded-full bg-black/70 px-2 py-1 text-xs font-black text-white transition-all duration-200;
-				}
-				&.picked {
-					img {
+				&.picked, &.locked {
+					img,div {
 						@apply filter-none;
 					}
-					span {
+					.pos-label {
 						@apply bg-black/80;
 					}
 				}

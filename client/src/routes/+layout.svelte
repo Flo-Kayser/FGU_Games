@@ -7,6 +7,8 @@
     import {transition} from "$lib/Transtion/stores/pageTranstion.js";
 
     import {initHistoryGuard} from "$lib/navigation/historyGuard.js";
+    import {apiClient} from "$lib/api/ApiClient.js";
+    import {versionIndexStore} from "$lib/storage/sessionStore.js";
 
 	let { children } = $props();
 
@@ -16,6 +18,8 @@
             lockHome: true,
             homePath: '/'
         });
+
+        apiClient.fetchData('index-data/versionIndex.json').then(versionIndexStore.set)
     })
 </script>
 

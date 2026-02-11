@@ -7,6 +7,8 @@
 	import { ensurePreFilledInTeam } from '$lib/logic/applyPreFilled.js';
 	import Wheel from '$lib/components/Wheel.svelte';
 
+	import RenderedCard from "$lib/components/RenderedCard.svelte";
+
 	import '$lib/Utils.js';
 	import { getWheelSize } from '$lib/Utils.js';
 	import { browser } from '$app/environment';
@@ -29,7 +31,6 @@
 	let team = {};
 	let filled = new Set();
 
-	// Wheel UI State
 	let wheelSpinning = false;
 	let wheelWinnerIndex = 0;
 	let wheelRunId = '';
@@ -193,16 +194,16 @@
 	function updatePosSize() {
 		if (!pitchImgEl) return;
 		const h = pitchImgEl.getBoundingClientRect().height || 0;
-		posSize = Math.max(24, Math.round(h / 6));
-		console.log(posSize)
+		posSize = Math.max(24, Math.round(h < 800 ? h / 5 : h / 4.5));
 	}
 
 	/* ---------------- Derived ---------------- */
 
 	$: positions = room?.level?.positions || [];
-	$: preFilled = new Set((room?.level?.preFilled || []).map((x) => x.posId));
+	$: preFilled = new Set(preFilledArr.map((x) => x.posId));
+	$: preFilledArr = room?.level?.preFilled || [];
+	$: prefilledMap = Object.fromEntries(preFilledArr.map((x) => [x.posId, x.cardId]));
 
-	// ⚠️ IDs bleiben IDs – Titel kommen später aus Registry
 	$: wheelItems = (room?.level?.games || []).map((id) => ({ id, label: id }));
 
 	function showPopup() {
@@ -244,6 +245,7 @@
 				{#each positions as pos}
 					{@const locked = preFilled.has(pos.id) || filled.has(pos.id)}
 					{@const selected = myPicks.includes(pos.id)}
+					{@const cardId = locked ? (team?.[pos.id] ?? prefilledMap?.[pos.id]) : null}
 
 					<button
 						class="position"
@@ -253,8 +255,12 @@
 						on:click={() => (selected ? unpick(pos.id) : pick(pos.id))}
 						disabled={(ready && myPicks.length !== 2) || locked}
 					>
-						<img src="https://assets.easysbc.io/fc26/cards/s_102_0.png" alt="card_placeholder" />
-						<span>{pos.label}</span>
+						{#if locked}
+							<RenderedCard {cardId} />
+						{:else}
+							<img src="https://assets.easysbc.io/fc26/cards/e_102_0.png" alt="card_placeholder" />
+						{/if}
+						<span class="pos-label">{pos.label}</span>
 					</button>
 				{/each}
 			</div>
